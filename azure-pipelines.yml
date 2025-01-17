@@ -1,10 +1,8 @@
-
 pool:
   name: mymachine
   
 trigger:
 - main
-
 
 jobs:
   - job: Build_Frontend
@@ -25,11 +23,12 @@ jobs:
   - job: Build_Backend
     displayName: 'Build Spring Boot Backend'
     steps:
+      # Step to install Maven if necessary (ensure that Maven is available on the agent)
       - task: Maven@3
         inputs:
           mavenPomFile: 'emp_backend/pom.xml'
           goals: 'clean install'
-          options: '-DskipTests=true'
+          options: '-DskipTests=true'  # Skipping tests to just build the app
         displayName: 'Build Spring Boot Application'
 
       # Step to run unit tests
@@ -39,13 +38,33 @@ jobs:
           goals: 'test'  # Runs unit tests
         displayName: 'Run Unit Tests'
 
+      # Step to publish build artifacts
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           ArtifactName: 'backend'
           publishLocation: 'Container'
         displayName: 'Publish Backend Build Artifacts'
+        
+      # SonarQube analysis preparation step
       - task: SonarQubePrepare@7
         inputs:
           SonarQube: 'sonar service'
           scannerMode: 'other'
+          extraProperties: |
+            # Additional properties that will be passed to the scanner,
+            # Put one key=value per line, example:
+            # sonar.exclusions=**/*.bin
+            sonar.projectKey=DevOps_DevOps_b8711e8d-58a6-4c0d-958d-8a824d482c00
+            sonar.projectName=DevOps
+            sonar.java.binaries=emp_backend/target/classes  # Ensure you point this to your compiled classes directory
+            sonar.sources=emp_backend/src/main/java
+            sonar.tests=emp_backend/src/test/java
+            sonar.java.test.binaries=emp_backend/target/test-classes
+        displayName: 'Prepare SonarQube Analysis'
+
+      # Step to run SonarQube analysis
+      - task: SonarQubeAnalyze@7
+        displayName: 'Run SonarQube Analysis'
+
+      # Step to check SonarQube quality gate
