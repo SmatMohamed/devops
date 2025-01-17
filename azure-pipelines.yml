@@ -2,10 +2,7 @@ trigger:
 - main
 
 pool:
-  name: 'Default'  # Ensure this points to a specific pool or you can choose a different pool
-  demands:
-    - agent.os -equals Linux  # This ensures the agent uses a Linux machine
-    - parallelism==1  # Make sure only one job runs at a time (to avoid parallel execution)
+  name: 'Default'  # Default Azure DevOps pool (this will choose the appropriate agent)
 
 jobs:
   - job: Build_Frontend
