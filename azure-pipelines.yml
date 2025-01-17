@@ -43,7 +43,14 @@ jobs:
           ArtifactName: 'backend'
           publishLocation: 'Container'
         displayName: 'Publish Backend Build Artifacts'
+
       - task: SonarQubePrepare@7
         inputs:
           SonarQube: 'sonar service'
           scannerMode: 'other'
+          extraProperties: |
+            # Additional properties that will be passed to the scanner,
+            # Put one key=value per line, example:
+            # sonar.exclusions=**/*.bin
+            sonar.projectKey=DevOps_DevOps_b8711e8d-58a6-4c0d-958d-8a824d482c00
+            sonar.projectName=DevOps
