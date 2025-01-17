@@ -25,6 +25,16 @@ jobs:
   - job: Build_Backend
     displayName: 'Build Spring Boot Backend'
     steps:
+      - task: Maven@4
+        inputs:
+          mavenPomFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
       - task: Maven@3
         inputs:
           mavenPomFile: 'emp_backend/pom.xml'
