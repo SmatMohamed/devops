@@ -38,3 +38,7 @@ jobs:
           ArtifactName: 'backend'
           publishLocation: 'Container'
         displayName: 'Publish Backend Build Artifacts'
+      - task: SonarQubePrepare@7
+        inputs:
+          SonarQube: 'sonar service'
+          scannerMode: 'other'
