@@ -1,8 +1,6 @@
 trigger:
 - main
 
-pool:
-  name: 'Default'  # Default Azure DevOps pool (this will choose the appropriate agent)
 
 jobs:
   - job: Build_Frontend
