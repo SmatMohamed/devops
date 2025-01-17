@@ -22,7 +22,7 @@ jobs:
 
   - job: Build_Backend
     displayName: 'Build Spring Boot Backend'
-    dependsOn: Build_Frontend
+    dependsOn: Build_Frontend  # This ensures the backend job waits for frontend to complete
     steps:
       - task: Maven@3
         inputs:
