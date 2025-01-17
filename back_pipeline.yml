@@ -1,0 +1,46 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  # Install JDK
+  - task: UseJavaVersion@1
+    inputs:
+      version: '11'
+      jdkArchitecture: 'x64'
+
+  # Set up MySQL
+  - task: Docker@2
+    displayName: 'Start MySQL in Docker'
+    inputs:
+      command: 'run'
+      containerName: 'mysql'
+      imageName: 'mysql:8'
+      ports: '3306:3306'
+      envVars: |
+        MYSQL_ROOT_PASSWORD=root
+        MYSQL_DATABASE=your_database_name
+      detach: true
+
+  # Build Spring Application
+  - script: |
+      ./mvnw clean package
+    workingDirectory: backend
+    displayName: 'Build Spring Application'
+
+  # Run Tests
+  - script: |
+      ./mvnw test
+    workingDirectory: backend
+    displayName: 'Run Unit Tests'
+
+  # Publish Build Artifacts
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: 'backend/target/*.jar'
+      artifactName: 'backend-jar'
+      publishLocation: 'Container'
