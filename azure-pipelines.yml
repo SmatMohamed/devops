@@ -30,7 +30,7 @@ jobs:
           mavenPomFile: 'emp_backend/pom.xml'
           goals: 'clean install'
           options: '-DskipTests=true'
-          displayName: 'Build Spring Boot Application'
+        displayName: 'Build Spring Boot Application'
 
       - task: PublishBuildArtifacts@1
         inputs:
