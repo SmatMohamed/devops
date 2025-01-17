@@ -23,7 +23,7 @@ steps:
       ports: '3306:3306'
       envVars: |
         MYSQL_ROOT_PASSWORD=root
-        MYSQL_DATABASE=your_database_name
+        MYSQL_DATABASE=emp
       detach: true
 
   # Build Spring Application
