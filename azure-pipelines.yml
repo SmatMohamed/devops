@@ -1,4 +1,5 @@
 pool:
+
   name: mymachine
   
 trigger:
@@ -35,6 +36,11 @@ jobs:
             # sonar.exclusions=**/*.bin
             sonar.projectKey=DevOps_DevOps_b8711e8d-58a6-4c0d-958d-8a824d482c00
             sonar.projectName=DevOps
+      - task: JavaToolInstaller@1
+        inputs:
+          versionSpec: '17'
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
       - task: Maven@3
         inputs:
           mavenPomFile: 'emp_backend/pom.xml'
