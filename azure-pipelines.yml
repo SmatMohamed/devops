@@ -39,7 +39,7 @@ jobs:
       - task: JavaToolInstaller@1
         inputs:
           versionSpec: '17'
-          jdkArchitectureOption: 'x64'
+          jdkArchitectureOption: 'x86'
           jdkSourceOption: 'PreInstalled'
       - task: Maven@3
         inputs:
