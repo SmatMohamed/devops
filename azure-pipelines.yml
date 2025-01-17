@@ -32,6 +32,13 @@ jobs:
           options: '-DskipTests=true'
         displayName: 'Build Spring Boot Application'
 
+      # Step to run unit tests
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'emp_backend/pom.xml'
+          goals: 'test'  # Runs unit tests
+        displayName: 'Run Unit Tests'
+
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
