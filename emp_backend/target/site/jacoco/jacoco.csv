@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+emp_backend,com.example.demo.service,EmployeeService,72,13,0,0,16,3,4,3,4,3
+emp_backend,com.example.demo.controller,EmployeeController,0,37,0,0,0,9,0,6,0,6
+emp_backend,com.example.demo.exception,ResourceNotFoundException,4,0,0,0,2,0,1,0,1,0
+emp_backend,com.example.demo.model,Employee,4,79,0,0,2,32,1,17,1,17
+emp_backend,com.example.demo.adminmodel,AdminModel,21,3,0,0,9,1,6,1,6,1
+emp_backend,com.example.demo,EmpBackendApplication,5,3,0,0,2,1,1,1,1,1

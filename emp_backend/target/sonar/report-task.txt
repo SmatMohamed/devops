@@ -1,0 +1,6 @@
+projectKey=employee-management-system
+serverUrl=http://localhost:9000
+serverVersion=24.12.0.100206
+dashboardUrl=http://localhost:9000/dashboard?id=employee-management-system
+ceTaskId=4906d2c7-88dd-49f3-9bf5-6ad246936284
+ceTaskUrl=http://localhost:9000/api/ce/task?id=4906d2c7-88dd-49f3-9bf5-6ad246936284
