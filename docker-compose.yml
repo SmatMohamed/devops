@@ -1,0 +1,32 @@
+version: '3'
+services:
+  # Backend service (Spring Boot)
+  backend:
+    build:
+      context: ./backend      # Path to the backend directory
+      dockerfile: Dockerfile  # Path to the Dockerfile in the backend directory
+    ports:
+      - "8080:8080"           # Expose port 8080 for the backend
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - db                    # If you have a database service, you can link it here
+
+  # Frontend service (Angular)
+  frontend:
+    build:
+      context: ./frontend     # Path to the frontend directory
+      dockerfile: Dockerfile  # Path to the Dockerfile in the frontend directory
+    ports:
+      - "80:80"               # Expose port 80 for the frontend (NGINX default)
+    depends_on:
+      - backend               # Ensure the frontend waits for the backend to be ready
+
+  # Database service (optional)
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: your-db
+    ports:
+      - "3306:3306"           # Expose MySQL port
